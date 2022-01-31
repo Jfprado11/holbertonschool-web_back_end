@@ -4,7 +4,7 @@
 from typing import Callable
 
 
-def multiply(x: float) -> float:
+def multiply(x) -> float:
     """multiplies a number"""
     return x * x
 
