@@ -11,4 +11,5 @@ f = TypeVar("f", asyncio.Task)
 
 
 def task_wait_random(max_delay: int) -> f:
+    """creating a task_delay"""
     return asyncio.create_task(wait_random(max_delay))
