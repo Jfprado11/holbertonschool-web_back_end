@@ -2,12 +2,12 @@
 """a module of async """
 
 import asyncio
-from typing import TypeVar
+from typing import NewType
 
 
 wait_random = __import__('0-basic_async_syntax').wait_random
 
-f = TypeVar("f", asyncio.Task)
+f = NewType("f", asyncio.Task)
 
 
 def task_wait_random(max_delay: int) -> f:
