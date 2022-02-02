@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env python3
 """Learing the syntax of Asyncio"""
 
 import asyncio
