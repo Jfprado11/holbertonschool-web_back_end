@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """
 Craetes a new class for a basic diccionary
 """
@@ -15,7 +15,7 @@ class BasicCache(BaseCaching):
 
     def put(self, key, item):
         """declares data to the cache"""
-        if (key != None) and (item != None):
+        if (key is not None) and (item is not None):
             self.cache_data[key] = item
 
     def get(self, key):
