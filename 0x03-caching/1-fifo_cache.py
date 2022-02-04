@@ -15,15 +15,12 @@ class FIFOCache(BaseCaching):
 
     def put(self, key, item):
         """store data in the dict cache"""
-        if (key != None) and (item != None):
+        if (key is not None) and (item is not None):
             self.cache_data[key] = item
             if (len(self.cache_data) > BaseCaching.MAX_ITEMS):
                 keys = next(iter(self.cache_data))
                 del self.cache_data[keys[0]]
                 print("DISCARD: {}".format(keys[0]))
-
-            else:
-                self.cache_data[key] = item
 
     def get(self, key):
         """get the data looking for"""
