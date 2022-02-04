@@ -15,7 +15,7 @@ class LIFOCache(BaseCaching):
 
     def put(self, key, item):
         """store data in the dict cache"""
-        if (key != None) and (item != None):
+        if (key is not None) and (item is not None):
             self.cache_data[key] = item
             if (len(self.cache_data) > BaseCaching.MAX_ITEMS):
                 last_item = list(self.cache_data)[-2]
