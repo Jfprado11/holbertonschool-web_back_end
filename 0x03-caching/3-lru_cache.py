@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-Implementing the LIFO caching
+Implementing the LRU  caching
 """
 
 BaseCaching = __import__("base_caching").BaseCaching
 
 
-class LIFOCache(BaseCaching):
-    """Class to represent a Lifo cache"""
+class LRUCache(BaseCaching):
+    """Class to represent a LRU cache"""
 
     def __init__(self) -> None:
         """Initialiaze the class"""
