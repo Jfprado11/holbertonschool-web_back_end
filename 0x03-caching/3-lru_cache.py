@@ -18,9 +18,9 @@ class LRUCache(BaseCaching):
         if (key is not None) and (item is not None):
             self.cache_data[key] = item
             if (len(self.cache_data) > BaseCaching.MAX_ITEMS):
-                last_item = list(self.cache_data)[-2]
-                del self.cache_data[last_item]
-                print("DISCARD: {}".format(last_item))
+                keys = next(iter(self.cache_data))
+                del self.cache_data[keys]
+                print("DISCARD: {}".format(keys))
 
     def get(self, key):
         """get the data looking for"""
