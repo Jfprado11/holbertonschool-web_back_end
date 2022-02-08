@@ -6,7 +6,7 @@ Obtains the indexes for the pagination
 from typing import Tuple
 
 
-def index_range(page: int, page_size: int) -> Tuple[int, int]:
+def index_range(page: int, page_size: int):
     """return a tuple with indexes to a list of pagination"""
     start_idx = page - 1
     end_idx = start_idx + page_size
