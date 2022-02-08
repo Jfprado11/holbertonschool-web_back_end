@@ -42,7 +42,7 @@ class Server:
 
     def get_hyper(self, page: int = 1, page_size: int = 10):
         """returns a dictionary containing the following key-value"""
-        dataset = self.dataset()
+        dataset = self.get_page(page, page_size)
 
         next_page = page + 1
         if (page > len(dataset)):
@@ -52,12 +52,13 @@ class Server:
         if (page <= 1):
             prev_page = None
 
-        total_pages = math.ceil(len(dataset) / page_size)
+        total_pages = math.ceil(len(self.__dataset) / page_size)
+        print(type(total_pages))
 
         return {
-            "page_size": page_size,
+            "page_size": len(dataset),
             "page": page,
-            "data": self.get_page(page, page_size),
+            "data": dataset,
             "next_page": next_page,
             "prev_page": prev_page,
             "total_pages": total_pages
