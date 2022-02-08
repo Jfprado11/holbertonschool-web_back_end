@@ -52,7 +52,7 @@ class Server:
             try:
                 datas.append(index_dataset[i])
                 i += 1
-            except:
+            except KeyError:
                 end_idx += 1
                 i += 1
         return {
