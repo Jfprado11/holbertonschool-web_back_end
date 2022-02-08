@@ -53,7 +53,6 @@ class Server:
             prev_page = None
 
         total_pages = math.ceil(len(self.__dataset) / page_size)
-        print(type(total_pages))
 
         return {
             "page_size": len(dataset),
