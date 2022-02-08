@@ -52,7 +52,7 @@ class Server:
         if (page <= 1):
             prev_page = None
 
-        total_pages = math.floor(len(dataset) / page_size)
+        total_pages = math.ceil(len(dataset) / page_size)
 
         return {
             "page_size": page_size,
