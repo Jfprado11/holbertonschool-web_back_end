@@ -31,3 +31,10 @@ def unauthorized_req():
     """raise the abort in 401
     """
     abort(401)
+
+
+@app_views.route('/forbidden', strict_slashes=False)
+def forbidden_req():
+    """response woth forbidden req
+	"""
+    abort(403)
