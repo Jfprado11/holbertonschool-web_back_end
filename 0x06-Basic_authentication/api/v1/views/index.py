@@ -36,5 +36,5 @@ def unauthorized_req():
 @app_views.route('/forbidden', strict_slashes=False)
 def forbidden_req():
     """response woth forbidden req
-	"""
+        """
     abort(403)
