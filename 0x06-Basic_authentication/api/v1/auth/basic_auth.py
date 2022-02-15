@@ -2,6 +2,7 @@
 """basic auth class template
 """
 
+import binascii
 from api.v1.auth.auth import Auth
 import base64
 
@@ -31,5 +32,5 @@ class BasicAuth(Auth):
         try:
             decodi = base64.b64decode(base64_authorization_header)
             return decodi.decode("utf-8")
-        except:
+        except binascii.Error:
             return None
