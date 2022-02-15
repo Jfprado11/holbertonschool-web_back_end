@@ -31,7 +31,6 @@ class Auth():
     def authorization_header(self, request=None) -> str:
         """check if the header recive the auth
         """
-        print(type(request.headers))
         if (request is None):
             return None
 
