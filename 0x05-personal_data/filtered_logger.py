@@ -16,4 +16,4 @@ def filter_datum(fields: List[str], redaction: str,
     for field in fields:
         new_log = re.sub(r'({}=).*?;'.format(field),
                          r'\1{};'.format(redaction), new_log)
-    return new_log
+    return re.sub(r";", separator, new_log)
