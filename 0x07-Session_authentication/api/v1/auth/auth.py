@@ -3,6 +3,7 @@
 handling the auth with a class
 """
 
+from os import getenv
 from typing import List, TypeVar
 from flask import request
 
@@ -43,3 +44,13 @@ class Auth():
         """returns the current log user
         """
         return None
+
+    def session_cookie(self, request=None):
+        """rturns teh value the cookie based on request
+        """
+        if request is None:
+            return None
+
+        _my_session_id = getenv("SESSION_NAME")
+        value_cookie = request.cookies.get(_my_session_id)
+        return value_cookie
