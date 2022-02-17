@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""expiration session
+"""expiration date
 """
 
 
@@ -13,6 +13,8 @@ class SessionExpAuth(SessionAuth):
     """
 
     def __init__(self) -> None:
+        """initaliza the class
+        """
         super().__init__()
         try:
             self.session_duration = int(getenv("SESSION_DURATION", default=0))
@@ -33,6 +35,8 @@ class SessionExpAuth(SessionAuth):
         return new_session
 
     def user_id_for_session_id(self, session_id=None):
+        """ gets the id for user if still time
+        """
         if session_id is None:
             return None
 
