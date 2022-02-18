@@ -36,6 +36,6 @@ class RedactingFormatter(logging.Formatter):
         """
         message_obfs = self.filter_datum(
             self.fields, self.REDACTION, record.getMessage(), self.SEPARATOR)
-        record.msg = message_obfs
+        record.msg = message_obfs.replace(";", "; ")
         format_msg = logging.Formatter(self.FORMAT)
         return format_msg.format(record)
