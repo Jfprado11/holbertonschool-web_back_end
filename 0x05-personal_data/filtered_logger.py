@@ -28,9 +28,7 @@ class RedactingFormatter(logging.Formatter):
         """
         message_obfs = filter_datum(
             self.fields, self.REDACTION, record.getMessage(), self.SEPARATOR)
-        record.msg = message_obfs.replace(";", "; ")
-        format_msg = logging.Formatter(self.FORMAT)
-        return format_msg.format(record)
+        return message_obfs
 
 
 def filter_datum(fields: List[str], redaction: str,
