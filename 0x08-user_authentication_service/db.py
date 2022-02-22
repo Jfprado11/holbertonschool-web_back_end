@@ -1,10 +1,12 @@
 """DB module
 """
 from typing import TypeVar
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
+from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy.exc import InvalidRequestError, OperationalError
 
 from user import Base, User
 
@@ -38,3 +40,27 @@ class DB:
         self.__session.add(new_user)
         self.__session.commit()
         return new_user
+
+    def find_user_by(self, **args):
+        """find a user depeding on the keywards
+        """
+        property(self._session)
+        query = "SELECT * FROM users "
+        i = 0
+        for arg, value in args.items():
+            if i == 0:
+                query += "WHERE "
+            else:
+                query += "AND "
+            query += "{} == '{}'".format(arg, value)
+            i += 1
+        query += ";"
+        users = None
+        try:
+            users = self.__session.query(
+                User).from_statement(text(query)).all()
+        except OperationalError:
+            raise InvalidRequestError
+        if len(users) == 0:
+            raise NoResultFound
+        return users[0]
