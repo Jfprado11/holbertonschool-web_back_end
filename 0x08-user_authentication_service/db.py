@@ -40,3 +40,37 @@ class DB:
         self._session.add(new_user)
         self._session.commit()
         return new_user
+
+    def find_user_by(self, **args: Dict[str, str]) -> TypeVar("User"):
+        """find a user depeding on the keywards
+        """
+        property(self._session)
+        query = "SELECT * FROM users "
+        i = 0
+        for arg, value in args.items():
+            if i == 0:
+                query += "WHERE "
+            else:
+                query += "AND "
+            query += "{} == '{}'".format(arg, value)
+            i += 1
+        query += ";"
+        users = None
+        try:
+            users = self.__session.query(
+                User).from_statement(text(query)).all()
+        except OperationalError:
+            raise InvalidRequestError
+        if len(users) == 0:
+            raise NoResultFound
+        return users[0]
+
+    def update_user(self, user_id: int, **args: Dict[str, str]) -> None:
+        """update an user for its id
+        """
+        user = self.find_user_by(id=user_id)
+        for arg, value in args.items():
+            if arg not in user.__dict__.keys():
+                raise ValueError
+            setattr(user, arg, value)
+            self.__session.commit()
