@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """Creating the model of the user
 """
 from sqlalchemy.ext.declarative import declarative_base
