@@ -23,6 +23,7 @@ class DB:
         Base.metadata.drop_all(self._engine)
         Base.metadata.create_all(self._engine)
         self.__session = None
+        property(self._session)
 
     @property
     def _session(self) -> Session:
@@ -36,7 +37,6 @@ class DB:
     def add_user(self, email: str, hashed_password: str) -> TypeVar("User"):
         """adding a new user
         """
-        property(self._session)
         new_user = User(email=email, hashed_password=hashed_password)
         self.__session.add(new_user)
         self.__session.commit()
