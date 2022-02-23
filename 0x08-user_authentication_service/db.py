@@ -44,7 +44,6 @@ class DB:
     def find_user_by(self, **args: Dict[str, str]) -> TypeVar("User"):
         """find a user depeding on the keywards
         """
-        property(self._session)
         query = "SELECT * FROM users "
         i = 0
         for arg, value in args.items():
@@ -57,7 +56,7 @@ class DB:
         query += ";"
         users = None
         try:
-            users = self.__session.query(
+            users = self._session.query(
                 User).from_statement(text(query)).all()
         except OperationalError:
             raise InvalidRequestError
@@ -73,4 +72,4 @@ class DB:
             if arg not in user.__dict__.keys():
                 raise ValueError
             setattr(user, arg, value)
-            self.__session.commit()
+            self._session.commit()
