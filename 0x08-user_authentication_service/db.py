@@ -1,6 +1,6 @@
 """DB module
 """
-from typing import TypeVar
+from typing import Dict, TypeVar
 from sqlalchemy import create_engine, text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -41,7 +41,7 @@ class DB:
         self.__session.commit()
         return new_user
 
-    def find_user_by(self, **args):
+    def find_user_by(self, **args: Dict[str, str]) -> TypeVar("User"):
         """find a user depeding on the keywards
         """
         property(self._session)
@@ -64,3 +64,13 @@ class DB:
         if len(users) == 0:
             raise NoResultFound
         return users[0]
+
+    def update_user(self, user_id: int, **args: Dict[str, str]) -> None:
+        """update an user for its id
+        """
+        user = self.find_user_by(id=user_id)
+        for arg, value in args.items():
+            if arg not in user.__dict__.keys():
+                raise ValueError
+            setattr(user, arg, value)
+            self.__session.commit()
