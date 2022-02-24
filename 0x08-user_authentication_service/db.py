@@ -41,7 +41,7 @@ class DB:
         self._session.commit()
         return new_user
 
-    def find_user_by(self, **args) -> User:
+    def find_user_by(self, **args: any) -> User:
         """find a user depeding on the keywards
         """
         # try:
