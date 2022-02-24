@@ -19,7 +19,7 @@ def home():
 
 @app.route('/users', methods=['POST'])
 def users():
-    "register two users"
+    """register two users"""
     email = request.form.get('email')
     password = request.form.get('password')
 
