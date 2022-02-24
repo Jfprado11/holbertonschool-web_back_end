@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """hash a password"""
 
+from typing import Union
 import uuid
 import bcrypt
 from db import DB
@@ -36,7 +37,7 @@ class Auth:
         except NoResultFound:
             return False
 
-    def create_session(self, email: str):
+    def create_session(self, email: str) -> Union[str, None]:
         """creates a session id
         """
         try:
