@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """DB module
 """
-"""DB module
-"""
-from sqlalchemy import create_engine
+from typing import Dict, TypeVar
+from sqlalchemy import create_engine, text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
-from user import Base, User
-from sqlalchemy.exc import InvalidRequestError
 from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy.exc import InvalidRequestError, OperationalError
+
+from user import Base, User
 
 
 class DB:
