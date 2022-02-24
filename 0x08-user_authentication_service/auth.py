@@ -2,9 +2,10 @@
 """hash a password"""
 
 import bcrypt
-from typing import TypeVar
 from db import DB
 from sqlalchemy.orm.exc import NoResultFound
+
+from user import User
 
 
 class Auth:
@@ -14,7 +15,7 @@ class Auth:
     def __init__(self):
         self._db = DB()
 
-    def register_user(self, email: str, password: str) -> TypeVar("User"):
+    def register_user(self, email: str, password: str) -> User:
         """returns the register user
         """
         try:
