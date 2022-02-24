@@ -44,13 +44,19 @@ class DB:
     def find_user_by(self, **args: Dict[str, str]) -> TypeVar("User"):
         """find a user depeding on the keywards
         """
-        try:
-            users = self._session.query(User).filter_by(**args).all()
-        except OperationalError:
+        # try:
+        #     users = self._session.query(User).filter_by(**args).all()
+        # except OperationalError:
+        #     raise InvalidRequestError
+        # if len(users) == 0:
+        #     raise NoResultFound
+        # return users[0]
+        if args is None:
             raise InvalidRequestError
-        if len(users) == 0:
+        users = self._session.query(User).filter_by(**args).first()
+        if users is None:
             raise NoResultFound
-        return users[0]
+        return users
 
     def update_user(self, user_id: int, **args: Dict[str, str]) -> None:
         """update an user for its id
