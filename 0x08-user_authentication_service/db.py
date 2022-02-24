@@ -41,7 +41,7 @@ class DB:
         self._session.commit()
         return new_user
 
-    def find_user_by(self, **args: any) -> User:
+    def find_user_by(self, **args) -> User:
         """find a user depeding on the keywards
         """
         # try:
@@ -51,9 +51,13 @@ class DB:
         # if len(users) == 0:
         #     raise NoResultFound
         # return users[0]
+        users = None
         if args is None:
             raise InvalidRequestError
-        users = self._session.query(User).filter_by(**args).first()
+        try:
+            users = self._session.query(User).filter_by(**args).first()
+        except OperationalError:
+            raise InvalidRequestError
         if users is None:
             raise NoResultFound
         return users
