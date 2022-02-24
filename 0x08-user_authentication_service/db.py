@@ -41,26 +41,28 @@ class DB:
         self._session.commit()
         return new_user
 
-    def find_user_by(self, **args) -> User:
+    def find_user_by(self, **args: Dict[str, str]) -> TypeVar("User"):
         """find a user depeding on the keywards
         """
-        # try:
-        #     users = self._session.query(User).filter_by(**args).all()
-        # except OperationalError:
-        #     raise InvalidRequestError
-        # if len(users) == 0:
-        #     raise NoResultFound
-        # return users[0]
+        query = "SELECT * FROM users "
+        i = 0
+        for arg, value in args.items():
+            if i == 0:
+                query += "WHERE "
+            else:
+                query += "AND "
+            query += "{} == '{}'".format(arg, value)
+            i += 1
+        query += ";"
         users = None
-        if args is None:
-            raise InvalidRequestError
         try:
-            users = self._session.query(User).filter_by(**args).first()
+            users = self._session.query(
+                User).from_statement(text(query)).all()
         except OperationalError:
             raise InvalidRequestError
-        if users is None:
+        if len(users) == 0:
             raise NoResultFound
-        return users
+        return users[0]
 
     def update_user(self, user_id: int, **args: Dict[str, str]) -> None:
         """update an user for its id
