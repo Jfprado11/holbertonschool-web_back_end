@@ -45,7 +45,7 @@ class Auth:
             self._db.update_user(user.id, session_id=_generate_uuid())
             return user.session_id
         except NoResultFound:
-            return None
+            return
 
 
 def _hash_password(password: str) -> bytes:
