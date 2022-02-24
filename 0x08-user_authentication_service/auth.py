@@ -36,7 +36,7 @@ class Auth:
         except NoResultFound:
             return False
 
-    def create_session(self, email):
+    def create_session(self, email: str):
         """creates a session id
         """
         try:
