@@ -44,20 +44,8 @@ class DB:
     def find_user_by(self, **args: Dict[str, str]) -> TypeVar("User"):
         """find a user depeding on the keywards
         """
-        query = "SELECT * FROM users "
-        i = 0
-        for arg, value in args.items():
-            if i == 0:
-                query += "WHERE "
-            else:
-                query += "AND "
-            query += "{} == '{}'".format(arg, value)
-            i += 1
-        query += ";"
-        users = None
         try:
-            users = self._session.query(
-                User).from_statement(text(query)).all()
+            users = self._session.query(User).filter_by(**args).all()
         except OperationalError:
             raise InvalidRequestError
         if len(users) == 0:
