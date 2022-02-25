@@ -16,14 +16,14 @@ class Auth:
         self._db = DB()
 
     def register_user(self, email: str, password: str) -> User:
-        """returns the register user
+        """Method that checks if a user already exists
         """
         try:
-            self._db.find_user_by(email=email)
-            raise ValueError("User {} already exists".format(email))
+            user = self._db.find_user_by(email=email)
+            raise ValueError('User {} already exists'.format(email))
         except NoResultFound:
-            pwd = _hash_password(password)
-            self._db.add_user(email, pwd)
+            passw = _hash_password(password)
+            return self._db.add_user(email, passw)
 
     def valid_login(self, email: str, password: str) -> bool:
         """validate the password
