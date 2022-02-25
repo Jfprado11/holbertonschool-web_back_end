@@ -3,9 +3,9 @@
 
 import bcrypt
 from db import DB
-from user import User
 from sqlalchemy.orm.exc import NoResultFound
 import uuid
+from user import User
 
 
 class Auth:
@@ -36,12 +36,13 @@ class Auth:
             return False
 
     def create_session(self, email: str) -> str:
-        """Method that generate a session ID and store it in the database
+        """creates a session id for a new user and store it in the database
         """
         try:
             user = self._db.find_user_by(email=email)
-            self._db.update_user(user.id, session_id=_generate_uuid())
-            return user.session_id
+            session_id = _generate_uuid()
+            user.session_id = session_id
+            return session_id
         except NoResultFound:
             return None
 
