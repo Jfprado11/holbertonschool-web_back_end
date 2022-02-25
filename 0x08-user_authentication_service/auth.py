@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
-"""hash a password"""
-
-from typing import Union
-import uuid
+"""Auth module
+"""
 import bcrypt
 from db import DB
-from sqlalchemy.orm.exc import NoResultFound
-
 from user import User
+from sqlalchemy.orm.exc import NoResultFound
+import uuid
 
 
 class Auth:
