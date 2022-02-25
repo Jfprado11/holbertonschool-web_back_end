@@ -5,7 +5,6 @@
 
 from flask import Flask, jsonify, redirect, request, abort, url_for
 from auth import Auth
-from sqlalchemy.orm.exc import NoResultFound
 
 AUTH = Auth()
 app = Flask(__name__)
@@ -83,7 +82,7 @@ def get_reset_password_token():
         return jsonify({
             "email": email,
             "reset_token": user_reset_tok}), 200
-    except NoResultFound:
+    except ValueError:
         abort(403)
 
 
