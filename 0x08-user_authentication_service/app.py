@@ -3,7 +3,7 @@
 """
 
 
-from flask import Flask, jsonify, request, abort
+from flask import Flask, jsonify, redirect, request, abort, url_for
 from auth import Auth
 
 AUTH = Auth()
@@ -45,6 +45,19 @@ def sessios():
     resp = jsonify({"email": email, "message": "logged in"})
     resp.set_cookie("session_id", new_session)
     return resp
+
+
+@app.route('/sessions', methods=["DELETE"])
+def delete_session():
+    """delete the session of a user
+    """
+    session = request.cookies.get("session_id")
+    user = AUTH.get_user_from_session_id(session_id=session)
+    if user is None:
+        abort(403)
+
+    AUTH.destroy_session(user.id)
+    return redirect(url_for('/'))
 
 
 if __name__ == "__main__":
