@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-"""Auth module
-"""
+"""hash a password"""
+
+from typing import Union
+import uuid
 import bcrypt
 from db import DB
-from user import User
 from sqlalchemy.orm.exc import NoResultFound
-import uuid
+
+from user import User
 
 
 class Auth:
@@ -16,29 +18,27 @@ class Auth:
         self._db = DB()
 
     def register_user(self, email: str, password: str) -> User:
-        """Method that checks if a user already exists
+        """returns the register user
         """
         try:
-            user = self._db.find_user_by(email=email)
-            raise ValueError('User {} already exists'.format(email))
+            self._db.find_user_by(email=email)
+            raise ValueError("User {} already exists".format(email))
         except NoResultFound:
-            passw = _hash_password(password)
-            return self._db.add_user(email, passw)
+            pwd = _hash_password(password)
+            self._db.add_user(email, pwd)
 
     def valid_login(self, email: str, password: str) -> bool:
-        """Method that locates a user by email and checks
-        the password
+        """validate the password
         """
         try:
             user = self._db.find_user_by(email=email)
-            if bcrypt.checkpw(password.encode(
-                    'utf-8'), user.hashed_password):
-                return True
+            return bcrypt.checkpw(password.encode('utf-8'),
+                                  user.hashed_password)
         except NoResultFound:
             return False
 
     def create_session(self, email: str) -> str:
-        """Method that generate a session ID and store it in the database
+        """creates a session id creates a sess
         """
         try:
             user = self._db.find_user_by(email=email)
