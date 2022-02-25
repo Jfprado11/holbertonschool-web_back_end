@@ -36,12 +36,14 @@ class Auth:
             return False
 
     def create_session(self, email: str) -> str:
-        """Method that generate a session ID and store it in the database
-        """
+        """ It takes an email string argument
+        and returns the session ID as a string"""
         try:
             user = self._db.find_user_by(email=email)
-            self._db.update_user(user.id, session_id=_generate_uuid())
-            return user.session_id
+            session_id = _generate_uuid()
+            user.session_id = session_id
+            self._db._session.commit()
+            return session_id
         except NoResultFound:
             return None
 
