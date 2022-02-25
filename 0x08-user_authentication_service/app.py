@@ -2,8 +2,8 @@
 """Creating a user auth service
 """
 
-from os import abort
-from flask import Flask, jsonify, request
+
+from flask import Flask, jsonify, request, abort
 from auth import Auth
 
 AUTH = Auth()
@@ -38,12 +38,13 @@ def sessios():
     email = request.form.get('email')
     password = request.form.get('password')
 
-    if(AUTH.valid_login(email=email, password=password)):
-        new_session = AUTH.create_session(email=email)
-        resp = jsonify({"email": email, "message": "logged in"})
-        resp.set_cookie("session_id", new_session)
-        return resp
-    abort(401)
+    log = AUTH.valid_login(email, password)
+    if log is False:
+        abort(401)
+    new_session = AUTH.create_session(email)
+    resp = jsonify({"email": email, "message": "logged in"})
+    resp.set_cookie("session_id", new_session)
+    return resp
 
 
 if __name__ == "__main__":
