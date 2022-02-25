@@ -18,14 +18,14 @@ class Auth:
         self._db = DB()
 
     def register_user(self, email: str, password: str) -> User:
-        """Method that checks if a user already exists
+        """returns the register user
         """
         try:
-            user = self._db.find_user_by(email=email)
-            raise ValueError('User {} already exists'.format(email))
+            self._db.find_user_by(email=email)
+            raise ValueError("User {} already exists".format(email))
         except NoResultFound:
-            passw = _hash_password(password)
-            return self._db.add_user(email, passw)
+            pwd = _hash_password(password)
+            self._db.add_user(email, pwd)
 
     def valid_login(self, email: str, password: str) -> bool:
         """validate the password
@@ -38,7 +38,7 @@ class Auth:
             return False
 
     def create_session(self, email: str) -> str:
-        """creates a session id creates a sess
+        """creates a session id creates a session
         """
         try:
             user = self._db.find_user_by(email=email)
