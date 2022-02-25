@@ -48,7 +48,7 @@ class Auth:
             return session_id
         except NoResultFound:
             return None
-el 
+
 
 def _hash_password(password: str) -> bytes:
     """hash a password"""
@@ -59,4 +59,4 @@ def _hash_password(password: str) -> bytes:
 def _generate_uuid() -> str:
     """returns a string in uuid
     """
-    return str(uuid4())
+    return str(uuid.uuid4())
