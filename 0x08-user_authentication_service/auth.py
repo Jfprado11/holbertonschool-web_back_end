@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
 """hash a password"""
 
-from typing import Union
-import uuid
 import bcrypt
 from db import DB
-from sqlalchemy.orm.exc import NoResultFound
-
 from user import User
+from sqlalchemy.orm.exc import NoResultFound
+import uuid
 
 
 class Auth:
@@ -38,7 +36,7 @@ class Auth:
             return False
 
     def create_session(self, email: str) -> str:
-        """creates a session id for a new user and store it in the database
+        """Method that generate a session ID and store it in the database
         """
         try:
             user = self._db.find_user_by(email=email)
