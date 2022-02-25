@@ -18,7 +18,7 @@ class Auth:
         self._db = DB()
 
     def register_user(self, email: str, password: str) -> User:
-        """returns the register user
+        """Method that checks if a user already exists
         """
         try:
             self._db.find_user_by(email=email)
