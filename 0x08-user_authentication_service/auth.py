@@ -49,12 +49,10 @@ class Auth:
 
 
 def _hash_password(password: str) -> bytes:
-    """hash a password"""
-    hash_pasw = bcrypt.hashpw(password.encode('utf8'), bcrypt.gensalt())
-    return hash_pasw
+    """returned bytes is a salted hash of the input password"""
+    return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
 
 def _generate_uuid() -> str:
-    """returns a string in uuid
-    """
+    """return a string representation of a new UUID"""
     return str(uuid.uuid4())
