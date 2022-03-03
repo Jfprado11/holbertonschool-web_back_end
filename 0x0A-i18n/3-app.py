@@ -32,7 +32,7 @@ def get_locale():
 def home():
     """home page of flask app
     """
-    return render_template("3-index.html", _=_)
+    return render_template("3-index.html")
 
 
 if __name__ == "__main__":
