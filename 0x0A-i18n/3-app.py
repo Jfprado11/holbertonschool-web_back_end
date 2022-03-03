@@ -7,8 +7,6 @@ from flask_babel import Babel, _
 
 app = Flask(__name__)
 
-babel = Babel(app)
-
 
 class Config ():
     """config the lang for the app
@@ -20,6 +18,8 @@ class Config ():
 
 app.config.from_object(Config)
 
+babel = Babel(app)
+
 
 @babel.localeselector
 def get_locale():
@@ -30,6 +30,8 @@ def get_locale():
 
 @app.route('/')
 def home():
+    """home page of flask app
+    """
     return render_template("3-index.html")
 
 
