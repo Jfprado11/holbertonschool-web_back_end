@@ -30,8 +30,6 @@ def get_locale():
 
 @app.route('/')
 def home():
-    """home page of flask app
-    """
     return render_template("3-index.html")
 
 
