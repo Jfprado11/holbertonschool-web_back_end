@@ -39,12 +39,13 @@ def get_user():
     return None
 
 
-@ app.before_request
+@app.before_request
 def before_request():
     """before the request made
     """
     user = get_user()
-    g.user = user
+    if user is not None:
+        g.user = user
 
 
 @ babel.localeselector
