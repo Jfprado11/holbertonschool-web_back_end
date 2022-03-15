@@ -24,11 +24,21 @@ class Cache():
         self._redis.set(key, data)
         return key
 
-    def get(self, key: str, fn: Callable) -> Union[str, bytes, int, float]:
+    def get(self, key: str, fn: Callable = None) -> Union[str, bytes, int, float]:
         """getting the redis value
         """
         value = self._redis.get(key)
-        if value is None:
-            return None
+
         if fn is not None:
             return fn(value)
+        return value
+
+    def get_str(self, data: bytes) -> str:
+        """ getting a string unicoded
+        """
+        return str(data.decode("utf-8"))
+
+    def get_int(self, data: bytes) -> int:
+        """getting the int values
+        """
+        return int(data.decode("utf-8"))
