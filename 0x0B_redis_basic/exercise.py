@@ -12,6 +12,8 @@ class Cache():
     """
 
     def __init__(self) -> None:
+        """iniatilizing the method
+        """
         self._redis = redis.Redis()
         self._redis.flushdb
 
