@@ -20,6 +20,6 @@ class Cache():
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """stores the data into the redis application
         """
-        # key = str(uuid.uuid4())
+        key = str(uuid.uuid4())
         self._redis.set("key", data)
-        return "key"
+        return key
