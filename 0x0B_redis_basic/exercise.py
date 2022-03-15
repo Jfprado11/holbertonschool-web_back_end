@@ -15,7 +15,7 @@ class Cache():
         """iniatilizing the method
         """
         self._redis = redis.Redis()
-        self._redis.flushdb
+        self._redis.flushdb()
 
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """stores the data into the redis application
