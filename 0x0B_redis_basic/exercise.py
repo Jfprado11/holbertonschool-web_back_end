@@ -12,12 +12,12 @@ class Cache():
     """
 
     def __init__(self) -> None:
-        _redis = redis.Redis()
-        _redis.flushdb
+        self._redis = redis.Redis()
+        self._redis.flushdb
 
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """stores the data into the redis application
         """
         key = str(uuid.uuid4())
-        redis.Redis().set(key, data)
+        self._redis.set(key, data)
         return key
