@@ -2,7 +2,7 @@
 """Creating a class for using with redis
 """
 
-from typing import Union
+from typing import Callable, Union
 import uuid
 import redis
 
@@ -23,3 +23,12 @@ class Cache():
         key = str(uuid.uuid4())
         self._redis.set(key, data)
         return key
+
+    def get(self, key: str, fn: Callable) -> Union[str, bytes, int, float]:
+        """getting the redis value
+        """
+        value = self._redis.get(key)
+        if value is None:
+            return None
+        if fn is not None:
+            return fn(value)
