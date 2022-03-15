@@ -14,8 +14,21 @@ class Cache():
     def __init__(self) -> None:
         """iniatilizing the method
         """
-        self._redis = redis.Redis()
+        self._redis = None
         self._redis.flushdb
+
+    @property
+    def _redis(self):
+        """property
+        """
+        return self.__redis
+
+    @_redis.setter
+    def _redis(self, status):
+        """setting the variable
+        """
+        if status is None:
+            self.__redis = redis.Redis()
 
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """stores the data into the redis application
