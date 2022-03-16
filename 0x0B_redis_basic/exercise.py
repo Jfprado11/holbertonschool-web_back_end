@@ -26,23 +26,23 @@ def count_calls(method: Callable) -> Callable:
     return calls_made
 
 
-# def call_history(method: Callable) -> Callable:
-#     """a decorator to the input and outpus
-#     """
-#     key_name_inputs = method.__qualname__ + ":inputs"
-#     key_name_outpus = method.__qualname__ + ":outputs"
+def call_history(method: Callable) -> Callable:
+    """a decorator to the input and outpus
+    """
+    key_name_inputs = method.__qualname__ + ":inputs"
+    key_name_outpus = method.__qualname__ + ":outputs"
 
-#     @wraps(method)
-#     def create_lists(self, *data):
-#         """creating the lists for outputs and inputs
-#         """
-#         data = str(data)
-#         self._redis.rpush(key_name_inputs, data)
-#         output_data = method(self, data)
-#         self._redis.rpush(key_name_outpus, output_data)
-#         return output_data
+    @wraps(method)
+    def create_lists(self, *data):
+        """creating the lists for outputs and inputs
+        """
+        data = str(data)
+        self._redis.rpush(key_name_inputs, data)
+        output_data = method(self, data)
+        self._redis.rpush(key_name_outpus, output_data)
+        return output_data
 
-#     return create_lists
+    return create_lists
 
 
 # def replay(fn: Callable) -> None:
@@ -79,7 +79,7 @@ class Cache():
         self._redis = redis.Redis()
         self._redis.flushdb()
 
-    # @call_history
+    @call_history
     @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """stores the data into the redis application
