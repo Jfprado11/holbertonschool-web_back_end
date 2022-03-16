@@ -45,7 +45,7 @@ def call_history(method: Callable) -> Callable:
     return create_lists
 
 
-def replay(fn: callable) -> None:
+def replay(fn: Callable) -> None:
     """display the callables of the funcion
     """
     r = redis.Redis()
