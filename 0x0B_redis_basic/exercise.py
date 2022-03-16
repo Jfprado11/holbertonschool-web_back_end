@@ -8,22 +8,22 @@ import uuid
 import redis
 
 
-# def count_calls(method: Callable) -> Callable:
-#     """decorator to see how many times it was called
-#     """
-#     key_name = method.__qualname__
+def count_calls(method: Callable) -> Callable:
+    """decorator to see how many times it was called
+    """
+    key_name = method.__qualname__
 
-#     @wraps(method)
-#     def calls_made(self, data):
-#         """count the times the method was called
-#         """
-#         stored = self._redis.get(key_name)
-#         if stored is None:
-#             self._redis.set(key_name, 1)
-#         else:
-#             self._redis.incr(key_name)
-#         return method(self, data)
-#     return calls_made
+    @wraps(method)
+    def calls_made(self, data):
+        """count the times the method was called
+        """
+        stored = self._redis.get(key_name)
+        if stored is None:
+            self._redis.set(key_name, 1)
+        else:
+            self._redis.incr(key_name)
+        return method(self, data)
+    return calls_made
 
 
 # def call_history(method: Callable) -> Callable:
@@ -80,7 +80,7 @@ class Cache():
         self._redis.flushdb()
 
     # @call_history
-    # @count_calls
+    @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """stores the data into the redis application
         """
