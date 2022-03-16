@@ -26,7 +26,7 @@ def count_calls(method: Callable) -> Callable:
     return calls_made
 
 
-def call_history(method: Callable) -> Callable:
+def call_history(method: Callable):
     """a decorator to the input and outpus
     """
     key_name_inputs = method.__qualname__ + ":inputs"
