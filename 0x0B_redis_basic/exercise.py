@@ -45,6 +45,30 @@ def call_history(method: Callable) -> Callable:
     return create_lists
 
 
+def replay(fn: callable) -> None:
+    """display the callables of the funcion
+    """
+    r = redis.Redis()
+    name_method = fn.__qualname__
+    times = r.get(name_method)
+    times = int(times)
+    print("{} was called {} times:".format(name_method, times))
+
+    key_inp = name_method + ":inputs"
+    key_out = name_method + ":outputs"
+    inputs = r.lrange(key_inp, 0, -1)
+    inputs = [x.decode("utf-8") for x in inputs]
+
+    outputs = r.lrange(key_out, 0, -1)
+    outputs = [x.decode("utf-8") for x in outputs]
+
+    combined = zip(inputs, outputs)
+    combined = list(combined)
+
+    for item in combined:
+        print("{}(*{}) -> {}".format(name_method, item[0], item[1]))
+
+
 class Cache():
     """a class for the cache using the redis tool
     """
