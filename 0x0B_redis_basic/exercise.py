@@ -26,11 +26,11 @@ def count_calls(method: Callable) -> Callable:
     return calls_made
 
 
-def call_history(method: Callable):
+def call_history(method: Callable) -> Callable:
     """a decorator to the input and outpus
     """
     key_name_inputs = method.__qualname__ + ":inputs"
-    key_name_outpus = method.__qualname__ + ":outputs"
+    key_name_outpus = method.__qualname__ + ":output"
 
     @wraps(method)
     def create_lists(self, data):
