@@ -30,10 +30,10 @@ def call_history(method: Callable) -> Callable:
     """a decorator to the input and outpus
     """
     key_name_inputs = method.__qualname__ + ":inputs"
-    key_name_outpus = method.__qualname__ + ":output"
+    key_name_outpus = method.__qualname__ + ":outputs"
 
     @wraps(method)
-    def create_lists(self, data):
+    def create_lists(self, *data):
         """creating the lists for outputs and inputs
         """
         data = str(data)
@@ -42,7 +42,7 @@ def call_history(method: Callable) -> Callable:
         self._redis.rpush(key_name_outpus, output_data)
         return output_data
 
-    return create_lists()
+    return create_lists
 
 
 class Cache():
