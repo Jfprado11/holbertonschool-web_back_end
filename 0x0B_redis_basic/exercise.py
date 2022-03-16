@@ -42,7 +42,7 @@ def call_history(method: Callable) -> Callable:
         self._redis.rpush(key_name_outpus, output_data)
         return output_data
 
-    return create_lists
+    return create_lists()
 
 
 class Cache():
