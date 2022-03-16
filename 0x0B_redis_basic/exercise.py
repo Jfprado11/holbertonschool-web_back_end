@@ -33,7 +33,7 @@ def call_history(method: Callable) -> Callable:
     key_name_outpus = method.__qualname__ + ":outputs"
 
     @wraps(method)
-    def create_lists(self, data):
+    def create_lists(self, data: Union[str, bytes, int, float]) -> str:
         """creating the lists for outputs and inputs
         """
         self._redis.rpush(key_name_inputs, str(data))
@@ -54,8 +54,8 @@ class Cache():
         self._redis = redis.Redis()
         self._redis.flushdb()
 
-    @count_calls
     @call_history
+    @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """stores the data into the redis application
         """
