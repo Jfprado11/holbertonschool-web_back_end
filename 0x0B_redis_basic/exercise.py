@@ -36,9 +36,9 @@ def call_history(method: Callable) -> Callable:
     def create_lists(self, *data):
         """creating the lists for outputs and inputs
         """
-        data = str(data)
-        self._redis.rpush(key_name_inputs, data)
-        output_data = method(self, data)
+        data_sent = str(data)
+        self._redis.rpush(key_name_inputs, data_sent)
+        output_data = method(self, data[0])
         self._redis.rpush(key_name_outpus, output_data)
         return output_data
 
