@@ -33,12 +33,12 @@ def call_history(method: Callable) -> Callable:
     key_name_outpus = method.__qualname__ + ":outputs"
 
     @wraps(method)
-    def create_lists(self, data: Union[str, bytes, int, float]) -> str:
+    def create_lists(self, data):
         """creating the lists for outputs and inputs
         """
         self._redis.rpush(key_name_inputs, str(data))
         output_data = method(self, data)
-        self._redis.rpush(key_name_outpus, output_data)
+        self._redis.rpush(key_name_outpus, str(output_data))
         return output_data
 
     return create_lists
