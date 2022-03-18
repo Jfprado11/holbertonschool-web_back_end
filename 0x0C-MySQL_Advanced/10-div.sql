@@ -3,10 +3,10 @@
 
 delimiter $$
 
-CREATE Function SafeDiv(a INT, b, INT)
-RETURNS INT
+CREATE Function SafeDiv(a INT, b INT)
+RETURNS float
 BEGIN
-    DECLARE valuereturn INT;
+
     IF b = 0 THEN
         SET valuereturn = 0;
     ELSE
@@ -14,4 +14,4 @@ BEGIN
     END IF;
     RETURN valuereturn;
 END$$
-delimiter;
+delimiter ;
