@@ -3,15 +3,12 @@
 
 delimiter $$
 
-CREATE Function SafeDiv(a INT, b INT)
-RETURNS float
+CREATE Function SafeDiv(a INT, b, INT)
+RETURNS INT
 BEGIN
-
     IF b = 0 THEN
-        SET valuereturn = 0;
-    ELSE
-        SET valuereturn = (a / b);
-    END IF;
-    RETURN valuereturn;
-END$$
+        RETURN (0);
+    RETURN (a / b);
+END;
+$$
 delimiter ;
