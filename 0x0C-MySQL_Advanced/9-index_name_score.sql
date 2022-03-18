@@ -1,0 +1,3 @@
+-- mysql advanced
+-- more indexing
+CREATE INDEX idx_name_first_score ON names (name(1) and score(1));
