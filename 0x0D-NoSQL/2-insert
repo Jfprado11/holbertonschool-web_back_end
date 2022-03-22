@@ -1,0 +1,4 @@
+// insert into the database
+
+db.school
+db.school.insertOne({school: "Holberton school"})
