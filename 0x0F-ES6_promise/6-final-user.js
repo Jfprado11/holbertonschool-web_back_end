@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import signUpUser from './4-user-promise';
 import uploadPhoto from './5-photo-reject';
 
@@ -7,13 +6,16 @@ export default function handleProfileSignup(firstName, lastName, fileName) {
     signUpUser(firstName, lastName),
     uploadPhoto(fileName),
   ]).then((values) => {
-    values.forEach((elements) => {
+    const array = values.map((elements) => {
+      const obj = { status: elements.status };
       if (Object.keys(elements).includes('reason')) {
-        Object.assign(elements, { value: elements.reason });
-        delete elements.reason;
+        Object.assign(obj, { value: elements.reason });
+      } else {
+        Object.assign(obj, { value: elements.value });
       }
+      return obj;
     });
-    return values;
+    return array;
   });
   return allArray;
 }
