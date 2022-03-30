@@ -6,7 +6,7 @@ export default async function handleProfileSignup(
   lastName,
   fileName,
 ) {
-  const sign = signUpUser(firstName, lastName);
+  const sign = await signUpUser(firstName, lastName);
   let photo = null;
   try {
     photo = await uploadPhoto(fileName);
