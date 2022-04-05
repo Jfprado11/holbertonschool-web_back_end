@@ -4,7 +4,7 @@ export default function updateUniqueItems(mapCheck) {
       try {
         mapCheck.set(key, 100);
       } catch (err) {
-        throw new Error('Cannot process');
+        throw err;
       }
     }
   });
