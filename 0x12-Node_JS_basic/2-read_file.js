@@ -16,7 +16,10 @@ function countStudents(path) {
         acum[student[3]] = [student[0]];
       }
     }
-    console.log(acum);
+    const keysFinal = Object.keys(acum);
+    keysFinal.forEach((item) => {
+      console.log(`Number of students in ${item}: ${acum[item].length}. List: ${acum[item].join(', ')}`);
+    });
   } catch (err) {
     throw new Error('Cannot load the database');
   }
