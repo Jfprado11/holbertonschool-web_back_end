@@ -4,7 +4,9 @@ function countStudents(path) {
   try {
     const fileCsv = fs.readFileSync(path, { encoding: 'utf8' });
     const dataGot = fileCsv.split('\n');
-    console.log(dataGot);
+    const dataSeparated = dataGot.filter((items) => items !== '').map((item) => item.split(','));
+    dataSeparated.shift();
+    console.log(`Number of students: ${dataSeparated.length}`);
   } catch (err) {
     throw new Error('Cannot load the database');
   }
