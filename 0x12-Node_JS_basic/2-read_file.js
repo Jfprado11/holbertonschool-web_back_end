@@ -2,11 +2,9 @@ const fs = require('fs');
 
 function countStudents(path) {
   try {
-    const fileCsv = fs.readFileSync(path, { encoding: 'utf8' });
-    const data = fileCsv.split('\n');
-    const dataSeparated = data
-      .filter((items) => items !== '')
-      .map((item) => item.split(','));
+    const fileCsv = fs.readFileSync(path);
+    const data = fileCsv.toString().split('\n');
+    const dataSeparated = data.filter((items) => items !== '').map((item) => item.split(','));
     dataSeparated.shift();
     console.log(`Number of students: ${dataSeparated.length}`);
     const finalData = dataSeparated.reduce((acum, student) => {
@@ -18,11 +16,7 @@ function countStudents(path) {
       return acum;
     }, {});
     Object.keys(finalData).forEach((item) => {
-      console.log(
-        `Number of students in ${item}: ${
-          finalData[item].length
-        }. List: ${finalData[item].join(', ')}`,
-      );
+      console.log(`Number of students in ${item}: ${finalData[item].length}. List: ${finalData[item].join(', ')}`);
     });
   } catch (err) {
     throw new Error('Cannot load the database');
