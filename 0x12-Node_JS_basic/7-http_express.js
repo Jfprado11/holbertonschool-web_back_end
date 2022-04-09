@@ -46,7 +46,7 @@ app.get('/students', async (req, res) => {
     if (idx === keysFinal.length - 1) {
       arrayToSend.push(`Number of students in ${item}: ${data[item].length}. List: ${data[item].join(', ')}`);
     } else {
-      arrayToSend.push(`Number of students in ${item}: ${data[item].length}. List: ${data[item].join(', ')}\n`);
+      arrayToSend.push(`Number of studentss in ${item}: ${data[item].length}. List: ${data[item].join(', ')}\n`);
     }
   });
   res.send(arrayToSend.join(''));
