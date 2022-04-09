@@ -35,24 +35,21 @@ app.get('/', (req, res) => {
 
 app.get('/students', async (req, res) => {
   res.set('content-type', 'text/plain');
-  try {
-    const arrayToSend = [];
-    arrayToSend.push('This is the list of our students\n');
-    const data = await countStudents(db);
-    arrayToSend.push(`Number of students: ${data.numOfStudents}\n`);
-    delete data.numOfStudents;
-    const keysFinal = Object.keys(data);
-    keysFinal.forEach((item, idx) => {
-      if (idx === keysFinal.length - 1) {
-        arrayToSend.push(`Number of students in ${item}: ${data[item].length}. List: ${data[item].join(', ')}`);
-      } else {
-        arrayToSend.push(`Number of students in ${item}: ${data[item].length}. List: ${data[item].join(', ')}\n`);
-      }
-    });
-    res.send(arrayToSend.join(''));
-  } catch (err) {
-    res.send(err);
-  }
+
+  const arrayToSend = [];
+  arrayToSend.push('This is the list of our students\n');
+  const data = await countStudents(db);
+  arrayToSend.push(`Number of students: ${data.numOfStudents}\n`);
+  delete data.numOfStudents;
+  const keysFinal = Object.keys(data);
+  keysFinal.forEach((item, idx) => {
+    if (idx === keysFinal.length - 1) {
+      arrayToSend.push(`Number of students in ${item}: ${data[item].length}. List: ${data[item].join(', ')}`);
+    } else {
+      arrayToSend.push(`Number of students in ${item}: ${data[item].length}. List: ${data[item].join(', ')}\n`);
+    }
+  });
+  res.send(arrayToSend.join(''));
 });
 
 app.listen(port);
