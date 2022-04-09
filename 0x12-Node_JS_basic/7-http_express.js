@@ -51,7 +51,7 @@ app.get('/students', async (req, res) => {
     });
     res.send(arrayToSend.join(''));
   } catch (err) {
-    res.send(err.message);
+    res.send('hola');
   }
 });
 
