@@ -33,18 +33,22 @@ const app = http.createServer(async (req, res) => {
     res.write('Hello Holberton School!');
   }
   if (req.url === '/students') {
-    res.write('This is the list of our students\n');
-    const data = await countStudents(db);
-    res.write(`Number of students: ${data.numOfStudents}\n`);
-    delete data.numOfStudents;
-    const keysFinal = Object.keys(data);
-    keysFinal.forEach((item, idx) => {
-      if (idx === keysFinal.length - 1) {
-        res.write(`Number of students in ${item}: ${data[item].length}. List: ${data[item].join(', ')}`);
-      } else {
-        res.write(`Number of students in ${item}: ${data[item].length}. List: ${data[item].join(', ')}\n`);
-      }
-    });
+    try {
+      res.write('This is the list of our students\n');
+      const data = await countStudents(db);
+      res.write(`Number of students: ${data.numOfStudents}\n`);
+      delete data.numOfStudents;
+      const keysFinal = Object.keys(data);
+      keysFinal.forEach((item, idx) => {
+        if (idx === keysFinal.length - 1) {
+          res.write(`Number of students in ${item}: ${data[item].length}. List: ${data[item].join(', ')}`);
+        } else {
+          res.write(`Number of students in ${item}: ${data[item].length}. List: ${data[item].join(', ')}\n`);
+        }
+      });
+    } catch (err) {
+      res.write(err.message);
+    }
   }
   res.end();
 });
