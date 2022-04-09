@@ -8,9 +8,12 @@ function countStudents(path) {
     dataSeparated.shift();
     console.log(`Number of students: ${dataSeparated.length}`);
     const acum = {};
-    const keys = Object.keys(dataSeparated);
     for (const student of dataSeparated) {
-      console.log(student);
+      const keys = Object.keys(acum);
+      console.log(keys);
+      if (keys.includes(student[3])) {
+        console.log(student);
+      }
     }
   } catch (err) {
     throw new Error('Cannot load the database');
