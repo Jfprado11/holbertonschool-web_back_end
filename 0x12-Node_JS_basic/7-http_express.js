@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/students', async (req, res) => {
-  res.setHeader('content-type', 'text/plain');
+  res.set('content-type', 'text/plain');
   try {
     const arrayToSend = [];
     arrayToSend.push('This is the list of our students\n');
