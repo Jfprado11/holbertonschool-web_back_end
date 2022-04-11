@@ -8,7 +8,6 @@ export default class StudentsController {
     try {
       arrayToSend.push('This is the list of our students\n');
       const data = await readDatabase(db);
-      delete data.numOfStudents;
       const keysFinal = Object.keys(data);
       keysFinal.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
       keysFinal.forEach((item, idx) => {
