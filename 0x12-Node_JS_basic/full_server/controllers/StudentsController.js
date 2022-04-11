@@ -30,7 +30,7 @@ export default class StudentsController {
       try {
         const data = await readDatabase(db);
         const students = data[param];
-        response.status(200).send(`Lists: ${students.join(', ')}`);
+        response.status(200).send(`List: ${students.join(', ')}`);
       } catch (err) {
         response.status(500).send('Cannot load the database');
       }

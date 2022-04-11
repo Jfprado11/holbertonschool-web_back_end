@@ -18,7 +18,7 @@ export default function readDatabase(path) {
           acum[student[3]] = [student[0]];
         }
       }
-      return resolve(acum);
+      return resolve('v');
     });
   });
 }
