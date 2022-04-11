@@ -4,20 +4,19 @@ const db = process.argv[2];
 
 export default class StudentsController {
   static async getAllStudents(request, response) {
-    const arrayToSend = [];
     try {
-      arrayToSend.push('This is the list of our students\n');
+      response.write('This is the list of our students\n');
       const data = await readDatabase(db);
       const keysFinal = Object.keys(data);
       keysFinal.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
       keysFinal.forEach((item, idx) => {
         if (idx === keysFinal.length - 1) {
-          arrayToSend.push(`Number of students in ${item}: ${data[item].length}. List: ${data[item].join(', ')}`);
+          response.write(`Number of students in ${item}: ${data[item].length}. List: ${data[item].join(', ')}`);
         } else {
-          arrayToSend.push(`Number of students in ${item}: ${data[item].length}. List: ${data[item].join(', ')}\n`);
+          response.write(`Number of students in ${item}: ${data[item].length}. List: ${data[item].join(', ')}\n`);
         }
       });
-      response.status(200).send(arrayToSend.join(''));
+      response.status(200).end();
     } catch (err) {
       response.status(500).send('Cannot load the database');
     }
