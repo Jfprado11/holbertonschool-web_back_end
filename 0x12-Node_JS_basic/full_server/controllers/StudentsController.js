@@ -31,10 +31,10 @@ export default class StudentsController {
         const students = data[param];
         response.status(200).send(`List: ${students.join(', ')}`);
       } catch (err) {
-        response.status(500).send('Cannot load the databases');
+        response.status(500).send('Cannot load the database');
       }
     } else {
-      response.status(500).send('Major parameter must be CS or SWE');
+      response.status(500).send('Major parameter must be CSs or SWE');
     }
   }
 }
