@@ -19,7 +19,8 @@ export default class StudentsController {
       });
       response.status(200).send(arrayToSend.join(''));
     } catch (err) {
-      response.status(500).send('Cannot load the database');
+      arrayToSend.push(err.message);
+      response.status(500).send(arrayToSend.join(''));
     }
   }
 
