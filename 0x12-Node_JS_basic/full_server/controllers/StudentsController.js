@@ -31,7 +31,6 @@ export default class StudentsController {
         const students = data[param];
         response.status(200).send(`List: ${students.join(', ')}`);
       } catch (err) {
-        console.log(err);
         response.status(500).send('Cannot load the database');
       }
     } else {
