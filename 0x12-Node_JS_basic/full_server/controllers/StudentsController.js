@@ -10,11 +10,12 @@ export default class StudentsController {
       const data = await readDatabase(db);
       delete data.numOfStudents;
       const keysFinal = Object.keys(data);
+      keysFinal.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
       keysFinal.forEach((item, idx) => {
         if (idx === keysFinal.length - 1) {
-          arrayToSend.push(`Number of studsents in ${item}: ${data[item].length}. List: ${data[item].join(', ')}`);
+          arrayToSend.push(`Number of students in ${item}: ${data[item].length}. List: ${data[item].join(', ')}`);
         } else {
-          arrayToSend.push(`Number of studsents in ${item}: ${data[item].length}. List: ${data[item].join(', ')}\n`);
+          arrayToSend.push(`Number of students in ${item}: ${data[item].length}. List: ${data[item].join(', ')}\n`);
         }
       });
       response.status(200).send(arrayToSend.join(''));
