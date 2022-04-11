@@ -19,8 +19,7 @@ export default class StudentsController {
       });
       response.status(200).send(arrayToSend.join(''));
     } catch (err) {
-      arrayToSend.push('Cannot load the database');
-      response.status(500).send(arrayToSend.join(''));
+      response.status(500).send('Cannot load the database');
     }
   }
 
@@ -32,7 +31,7 @@ export default class StudentsController {
         const students = data[param];
         response.status(200).send(`List: ${students.join(', ')}`);
       } catch (err) {
-        response.status(500).send('Cannot load the database');
+        response.status(500).send('Cannot load the databases');
       }
     } else {
       response.status(500).send('Major parameter must be CS or SWE');
