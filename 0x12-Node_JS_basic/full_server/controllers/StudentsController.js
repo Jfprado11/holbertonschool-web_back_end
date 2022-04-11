@@ -1,11 +1,13 @@
 import readDatabase from '../utils';
 
+const db = process.argv[2];
+
 export default class StudentsController {
   static async getAllStudents(request, response) {
     const arrayToSend = [];
     try {
       arrayToSend.push('This is the list of our students\n');
-      const data = await readDatabase('database.csv');
+      const data = await readDatabase(db);
       arrayToSend.push(`Number of students: ${data.numOfStudents}\n`);
       delete data.numOfStudents;
       const keysFinal = Object.keys(data);
@@ -18,7 +20,6 @@ export default class StudentsController {
       });
       response.status(200).send(arrayToSend.join(''));
     } catch (err) {
-      // arrayToSend.push(err.message);
       response.status(500).send('Cannot load the database');
     }
   }
@@ -27,7 +28,7 @@ export default class StudentsController {
     const param = request.params.major;
     if (param === 'CS' || param === 'SWE') {
       try {
-        const data = await readDatabase('database.csv');
+        const data = await readDatabase(db);
         const students = data[param];
         response.status(200).send(`List: ${students.join(', ')}`);
       } catch (err) {
