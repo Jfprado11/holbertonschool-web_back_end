@@ -9,7 +9,7 @@ export default function readDatabase(path) {
       const dataGot = data.split('\n');
       const dataSeparated = dataGot.filter((items) => items !== '').map((item) => item.split(','));
       dataSeparated.shift();
-      const acum = { numOfStudents: dataSeparated.length };
+      const acum = {};
       for (const student of dataSeparated) {
         const keys = Object.keys(acum);
         if (keys.includes(student[3])) {

@@ -8,7 +8,6 @@ export default class StudentsController {
     try {
       arrayToSend.push('This is the list of our students\n');
       const data = await readDatabase(db);
-      arrayToSend.push(`Number of students: ${data.numOfStudents}\n`);
       delete data.numOfStudents;
       const keysFinal = Object.keys(data);
       keysFinal.forEach((item, idx) => {
