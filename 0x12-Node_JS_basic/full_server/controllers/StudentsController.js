@@ -27,14 +27,13 @@ export default class StudentsController {
   static async getAllStudentsByMajor(request, response) {
     const param = request.params.major;
     if (param === 'CS' || param === 'SWE') {
-      readDatabase(db)
-        .then((data) => {
-          const students = data[param];
-          response.status(200).send(`List: ${students.join(', ')}`);
-        })
-        .catch(() => {
-          response.status(500).send('Cannot load the database');
-        });
+      try {
+        const data = await readDatabase(db);
+        const students = data[param];
+        response.status(200).send(`List: ${students.join(', ')}`);
+      } catch (err) {
+        response.status(500).send('Cannot load the database');
+      }
     } else {
       response.status(500).send('Major parameter must be CS or SWE');
     }
