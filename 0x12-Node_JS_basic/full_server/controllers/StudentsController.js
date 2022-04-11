@@ -12,9 +12,9 @@ export default class StudentsController {
       const keysFinal = Object.keys(data);
       keysFinal.forEach((item, idx) => {
         if (idx === keysFinal.length - 1) {
-          arrayToSend.push(`Number of students in ${item}: ${data[item].length}. List: ${data[item].join(', ')}`);
+          arrayToSend.push(`Number of studsents in ${item}: ${data[item].length}. List: ${data[item].join(', ')}`);
         } else {
-          arrayToSend.push(`Number of students in ${item}: ${data[item].length}. List: ${data[item].join(', ')}\n`);
+          arrayToSend.push(`Number of studsents in ${item}: ${data[item].length}. List: ${data[item].join(', ')}\n`);
         }
       });
       response.status(200).send(arrayToSend.join(''));
@@ -34,7 +34,7 @@ export default class StudentsController {
         response.status(500).send('Cannot load the database');
       }
     } else {
-      response.status(500).send('Major parameter must be CSs or SWE');
+      response.status(500).send('Major parameter must be CS or SWE');
     }
   }
 }
