@@ -4,7 +4,7 @@ export default function readDatabase(path) {
   return new Promise((resolve, reject) => {
     fs.readFile(path, { encoding: 'utf8' }, (err, data) => {
       if (err) {
-        return reject(new Error('Cannot load the database'));
+        return reject(err);
       }
       const dataGot = data.split('\n');
       const dataSeparated = dataGot.filter((items) => items !== '').map((item) => item.split(','));
@@ -18,7 +18,7 @@ export default function readDatabase(path) {
           acum[student[3]] = [student[0]];
         }
       }
-      return resolve('v');
+      return resolve(acum);
     });
   });
 }
