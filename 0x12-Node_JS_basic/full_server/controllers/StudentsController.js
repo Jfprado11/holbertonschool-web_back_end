@@ -31,7 +31,7 @@ export default class StudentsController {
         const data = await readDatabase(db);
         const students = data[param];
         const stringToSend = students.join(', ');
-        response.status(200).send(`List: ${stringToSend}`);
+        return response.status(200).send(`List: ${stringToSend}`);
       } catch (err) {
         response.status(500).send('Cannot load the database');
       }
