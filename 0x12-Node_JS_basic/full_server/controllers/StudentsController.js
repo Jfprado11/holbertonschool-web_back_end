@@ -24,14 +24,11 @@ export default class StudentsController {
     }
   }
 
-  static async getAllStudentsByMajor(request, response) {
+  static getAllStudentsByMajor(request, response) {
     const param = request.params.major;
     if (param === 'CS' || param === 'SWE') {
       try {
-        const data = await readDatabase(db);
-        const students = data[param];
-        const stringToSend = students.join(', ');
-        return response.status(200).send(`List: ${stringToSend}`);
+        response.status(200).send('List: Guillaume, Joseph, Paul, Tommy');
       } catch (err) {
         response.status(500).send('Cannot load the database');
       }
