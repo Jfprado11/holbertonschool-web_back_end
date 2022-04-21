@@ -1,6 +1,6 @@
 import { createClient } from 'redis';
 
-(async () => {
+(() => {
   const client = createClient();
 
   client.on('error', (err) =>
@@ -10,5 +10,5 @@ import { createClient } from 'redis';
     console.log('Redis client connected to the server'),
   );
 
-  await client.connect();
+  client.connect();
 })();
